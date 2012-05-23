@@ -160,7 +160,7 @@
     <string name="volume_wake_title">Volume wake</string>
     <string name="volume_wake_summary">Tapping the volume keys while your phone is off will turn the screen on.</string>
     <string name="trackpad_wake_title">Trackpad wake</string>
-    <string name="trackpad_wake_summary">Pushing the trackpad will turn the screen on.</string>
+    <string name="trackpad_wake_summary">Tapping the trackpad will turn the screen on.</string>
     <string name="volume_music_controls_title">Volume music controls</string>
     <string name="volume_music_controls_summary">Long press volume buttons to skip tracks while screen is off. Volume wake will not work when music is playing.</string>
     <string name="lockscreen_show_nav_title">Hide nav bar</string>
