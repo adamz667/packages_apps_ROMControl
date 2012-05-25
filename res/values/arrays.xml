@@ -354,7 +354,7 @@
 		<item>Quad</item>
 		<item>Octo</item>
 		<item>AOSP</item>
-		<item>Honeycomb</item>
+		<item>LG4x like</item>
 	</string-array>
 
 	<string-array name="pref_lockscreen_calendar_interval_values" translatable="false">
