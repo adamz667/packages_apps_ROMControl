@@ -156,9 +156,9 @@ public class UserInterface extends AOKPPreferenceFragment implements
             ((PreferenceGroup) findPreference("misc")).removePreference(mHomeLongpress);
         }
 
-        if(mTablet) {
-            ((PreferenceGroup) findPreference("misc")).removePreference(mHomeLongpress);
-        }
+        //if(mTablet) {
+        //    ((PreferenceGroup) findPreference("misc")).removePreference(mHomeLongpress);
+        //}
     }
 
     private void updateCustomLabelTextSummary() {
