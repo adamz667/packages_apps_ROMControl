@@ -82,6 +82,8 @@
     <string name="navbar_action_power">Power</string>
     <string name="navbar_action_none">Empty</string>
 
+    <string name="navbar_enable_bar">Enable bar</string>
+
     <string name="navbar_enable_dialog_title">Reboot required!</string>
     <string name="navbar_enable_dialog_msg">Please reboot to enable/disable the navigation bar properly!</string>
     <string name="navbar_enable_dialog_negative">I\'ll reboot later</string>
@@ -287,6 +289,9 @@
     <string name="statusbar_layout_summary">Change the notification drawer layout (requires UI restart)</string>
     <string name="statusbar_fontsize">Statusbar Font Size</string>
     <string name="statusbar_fontsize_summary">Change the size of text elements on statusbar</string>
+
+    <string name="status_bar_notif_count_title">Show notification count</string>
+    <string name="status_bar_notif_count_summary">Display number of pending notifications on the status bar</string>
 
     <!-- Statusbar | Battery -->
     <string name="battery_icon">Battery icon style</string>
@@ -587,6 +592,9 @@
     <string name="weather_47">Isolated Thundershowers</string>
     <!-- Forecase unavailable -->
     <string name="weather_3200"></string>
+
+    <!-- Miscellaneous -->
+    <string name="location_unavailable">Unable to retrieve location information for weather update</string>
 
 
 </resources>
