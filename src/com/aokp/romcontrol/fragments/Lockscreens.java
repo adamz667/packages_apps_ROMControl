@@ -290,6 +290,7 @@ public class Lockscreens extends AOKPPreferenceFragment implements
 
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.TRACKBALL_WAKE_SCREEN,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
 
         } else if (preference == mStockMusicLayout) {
 
