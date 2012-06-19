@@ -216,6 +216,7 @@ public class Navbar extends AOKPPreferenceFragment implements
         }
         refreshSettings();
         setHasOptionsMenu(true);
+        updateGlowTimesSummary();
 
         IntentFilter filter = new IntentFilter(ACTION_SEND_ID);
         mContext.registerReceiver(mWidgetIdReceiver, filter);
@@ -317,13 +318,13 @@ public class Navbar extends AOKPPreferenceFragment implements
         		PreferenceGroup targetGroup = (PreferenceGroup) findPreference("navbar_widgets");
         		Preference p = new Preference(mContext);
         		p.setKey("navbar_widget_add");
-                p.setTitle("Add new widget");
-                p.setSummary("Press to add another widget");
+                p.setTitle(getResources().getString(R.string.navigation_bar_add_new_widget_title));
+                p.setSummary(getResources().getString(R.string.navigation_bar_add_new_widget_summary));
                 targetGroup.addPreference(p);
                 mPendingWidgetDrawer = mWidgetIdQty;    
         		mPendingPreference = preference;
         		mPendingPreference.setKey("navbar_widget_" + mWidgetIdQty);
-        		mPendingPreference.setTitle("Widget " + (mWidgetIdQty + 1));
+        		mPendingPreference.setTitle(getResources().getString(R.string.navigation_bar_widget) + (mWidgetIdQty + 1));
         		mWidgetIdQty++;
         	} else {
         		mPendingPreference = preference;
@@ -386,18 +387,17 @@ public class Navbar extends AOKPPreferenceFragment implements
 
         } else if (preference == mGlowTimes) {
             // format is (on|off) both in MS
-            int breakIndex = ((String) newValue).indexOf("|");
             String value = (String) newValue;
+            String[] breakIndex = value.split("\\|");
 
-            int offTime = Integer.parseInt(value.substring(breakIndex + 1));
-            int onTime = Integer.parseInt(value.substring(0, breakIndex));
+            int onTime = Integer.valueOf(breakIndex[0]);
+            int offTime = Integer.valueOf(breakIndex[1]);
 
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_GLOW_DURATION[0],
-                    offTime);
+                    Settings.System.NAVIGATION_BAR_GLOW_DURATION[0], offTime);
             Settings.System.putInt(getActivity().getContentResolver(),
-                    Settings.System.NAVIGATION_BAR_GLOW_DURATION[1],
-                    onTime);
+                    Settings.System.NAVIGATION_BAR_GLOW_DURATION[1], onTime);
+            updateGlowTimesSummary();
             return true;
         } else if (preference == mButtonAlpha) {
             float val = Float.parseFloat((String) newValue);
@@ -467,6 +467,31 @@ public class Navbar extends AOKPPreferenceFragment implements
                 Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, isBarOn ? 0 : 1);
         Settings.System.putInt(mContext.getContentResolver(),
                 Settings.System.NAVIGATION_BAR_BUTTONS_SHOW, isBarOn ? 1 : 0);
+    }
+
+    private void updateGlowTimesSummary() {
+        int resId;
+        String combinedTime = Settings.System.getString(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_GLOW_DURATION[1]) + "|" +
+                Settings.System.getString(getContentResolver(),
+                Settings.System.NAVIGATION_BAR_GLOW_DURATION[0]);
+
+        String[] glowArray = getResources().getStringArray(R.array.glow_times_values);
+
+        if (glowArray[0].equals(combinedTime)) {
+            resId = R.string.glow_times_off;
+            mGlowTimes.setValueIndex(0);
+        } else if (glowArray[1].equals(combinedTime)) {
+            resId = R.string.glow_times_superquick;
+            mGlowTimes.setValueIndex(1);
+        } else if (glowArray[2].equals(combinedTime)) {
+            resId = R.string.glow_times_quick;
+            mGlowTimes.setValueIndex(2);
+        } else {
+            resId = R.string.glow_times_normal;
+            mGlowTimes.setValueIndex(3);
+        }
+        mGlowTimes.setSummary(getResources().getString(resId));
     }
 
     public int mapChosenDpToPixels(int dp) {
@@ -667,7 +692,7 @@ public class Navbar extends AOKPPreferenceFragment implements
         for (int i = 0; i < (mWidgetIdQty); i++) {
             Preference p = new Preference(mContext);
             p.setKey("navbar_widget_" + i);
-            p.setTitle("Widget " + (i + 1));
+            p.setTitle(getResources().getString(R.string.navigation_bar_widget) + (i + 1));
             if (widgetIds[i] != -1)
                 p.setSummary(prefs.getString("navbar_widget_" + i, "None"));
             targetGroup.addPreference(p);
@@ -677,8 +702,8 @@ public class Navbar extends AOKPPreferenceFragment implements
         widgetIds[mWidgetIdQty] = -1;
         Preference p = new Preference(mContext);
         p.setKey("navbar_widget_add");
-        p.setTitle("Add new widget");
-        p.setSummary("Press to add another widget");
+        p.setTitle(getResources().getString(R.string.navigation_bar_add_new_widget_title));
+        p.setSummary(getResources().getString(R.string.navigation_bar_add_new_widget_summary));
         targetGroup.addPreference(p);
 
     }

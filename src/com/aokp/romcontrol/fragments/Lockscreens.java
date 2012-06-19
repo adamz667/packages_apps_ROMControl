@@ -67,6 +67,8 @@ public class Lockscreens extends AOKPPreferenceFragment implements
     private static final String PREF_VOLUME_WAKE = "volume_wake";
     private static final String PREF_TRACKPAD_WAKE = "trackpad_wake";
     private static final String PREF_VOLUME_MUSIC = "volume_music_controls";
+    
+    private static final String PREF_STOCK_MUSIC_LAYOUT = "lockscreen_stock_music_layout";
 
     private static final String PREF_LOCKSCREEN_BATTERY = "lockscreen_battery";
     private static final String PREF_LOCKSCREEN_WEATHER = "lockscreen_weather";
@@ -107,6 +109,7 @@ public class Lockscreens extends AOKPPreferenceFragment implements
     ListPreference mCalendarRange;
     CheckBoxPreference mLockscreenCalendarHideOngoing;
     CheckBoxPreference mLockscreenCalendarUseColors;
+    CheckBoxPreference mStockMusicLayout;
 
     Preference mLockscreenWallpaper;
 
@@ -166,6 +169,10 @@ public class Lockscreens extends AOKPPreferenceFragment implements
         mVolumeMusic = (CheckBoxPreference) findPreference(PREF_VOLUME_MUSIC);
         mVolumeMusic.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
                 Settings.System.VOLUME_MUSIC_CONTROLS, 0) == 1);
+
+        mStockMusicLayout = (CheckBoxPreference) findPreference(PREF_STOCK_MUSIC_LAYOUT);
+        mStockMusicLayout.setChecked(Settings.System.getInt(getActivity().getContentResolver(),
+                Settings.System.LOCKSCREEN_STOCK_MUSIC_LAYOUT, 0) == 1);
 
         mLockscreenWallpaper = findPreference("wallpaper");
 
@@ -283,6 +290,12 @@ public class Lockscreens extends AOKPPreferenceFragment implements
 
             Settings.System.putInt(getActivity().getContentResolver(),
                     Settings.System.TRACKBALL_WAKE_SCREEN,
+                    ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
+
+        } else if (preference == mStockMusicLayout) {
+
+            Settings.System.putInt(getActivity().getContentResolver(),
+                    Settings.System.LOCKSCREEN_STOCK_MUSIC_LAYOUT,
                     ((CheckBoxPreference) preference).isChecked() ? 1 : 0);
             return true;
 
