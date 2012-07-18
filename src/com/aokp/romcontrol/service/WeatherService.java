@@ -101,31 +101,33 @@ public class WeatherService extends IntentService {
                 manual = extras.getBoolean(INTENT_EXTRA_ISMANUAL, false);
             }
             if (customLoc != null && useCustomLoc) {
-                if (manual) {
-                    makeToast(context.getString(R.string.weather_refreshing));
-                }
                 woeid = YahooPlaceFinder.GeoCode(getApplicationContext(), customLoc);
                 // network location
             } else {
                 // do not attempt to get a location without data
                 boolean networkAvailable = Helpers.isNetworkAvailable(getApplicationContext());
                 if(networkAvailable) {
-                    if (manual) {
-                        makeToast(context.getString(R.string.weather_refreshing));
-                    }
                     final LocationManager locationManager = (LocationManager) this
                             .getSystemService(Context.LOCATION_SERVICE);
+
+                    Criteria crit = new Criteria();
+                    crit.setAccuracy(Criteria.ACCURACY_COARSE);
+                    String bestProvider = locationManager.getBestProvider(crit, true);
+
                     if (!intent.hasExtra(INTENT_EXTRA_NEWLOCATION)) {
                         intent.putExtra(INTENT_EXTRA_NEWLOCATION, true);
                         PendingIntent pi = PendingIntent.getService(getApplicationContext(), 0, intent,
                                 PendingIntent.FLAG_CANCEL_CURRENT);
-                        locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, pi);
+                        if (bestProvider != null) {
+                            locationManager.requestSingleUpdate(bestProvider, pi);
+                        } else {
+                            if (manual) {
+                                makeToast(context.getString(R.string.location_unavailable));
+                            }
+                        }
                         return;
                     }
-    
-                    Criteria crit = new Criteria();
-                    crit.setAccuracy(Criteria.ACCURACY_COARSE);
-                    String bestProvider = locationManager.getBestProvider(crit, true);
+
                     Location loc = null;
                     if (bestProvider != null) {
                         loc = locationManager.getLastKnownLocation(bestProvider);
