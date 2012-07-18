@@ -147,6 +147,8 @@
   <string name="lockscreen_battery_summary">Vždy zobrazovat % baterie (nejen při nabíjení) na zamčené obrazovce</string>
   <string name="lockscreen_weather_title">Počasí na zamčené obrazovce</string>
   <string name="lockscreen_weather_summary">Zobrazovat informace o počasí na zamčené obrazovce. Je třeba mít zapnutou službu počasí!</string>
+  <string name="lockscreen_weather_type_title">Styl počasí na zamčené obrazovce</string>
+  <string name="lockscreen_weather_type_summary">Nastavuje zobrazení grafické nebo textové podoby informace o počasí.</string>
   <string name="volume_wake_title">Probuzení tlačítky hlasitosti</string>
   <string name="volume_wake_summary">Stisknutím tlačítka hlasitosti ve vypnutém stavu dojde k zapnutí obrazovky.</string>
   <string name="volume_music_controls_title">Ovládání hudby tlačítky hlasitosti</string>
@@ -501,4 +503,15 @@
   <string name="weather_47">Ojedinělé bouřky</string>
   <!-- Forecase unavailable -->
   <string name="weather_3200"></string>
+  <!-- Miscellaneous -->
+  <string name="location_unavailable">Nelze získat informace o poloze pro aktualizaci počasí</string>
+  <!-- cardinal directions -->
+  <string name="direction_north">S</string>
+  <string name="direction_north_east">SV</string>
+  <string name="direction_east">V</string>
+  <string name="direction_south_east">JV</string>
+  <string name="direction_south">J</string>
+  <string name="direction_south_west">JZ</string>
+  <string name="direction_west">Z</string>
+  <string name="direction_north_west">SZ</string>
 </resources>
