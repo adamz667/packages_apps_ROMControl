@@ -356,7 +356,7 @@
         <string-array name="pref_lockscreen_options_entries">
 		<item>Stock</item>
 		<item>AOSP</item>
-		<item>LG4x like</item>
+		<item>Honeycomb</item>
 		<item>3 Targets</item>
 		<item>4 Targets</item>
 		<item>5 Targets</item>
